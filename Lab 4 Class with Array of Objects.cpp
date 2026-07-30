@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <limits>          // Needed for numeric_limits (used to clear input buffer)
 using namespace std;
 
 class Student {
@@ -9,16 +10,42 @@ private:
     double total;
     double average;
 
+    // Private helper method to get a valid mark between 0 and 100
+    double getValidMark(int subjectNum) {
+        double mark;
+        while (true) {
+            cout << "Enter marks for subject " << subjectNum << ": ";
+            cin >> mark;
+
+            // Check if input was not a number
+            if (cin.fail()) {
+                cin.clear();                                              // Clear the error flag on cin
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');      // Discard the bad input left in buffer
+                cout << "Invalid input for Subject " << subjectNum
+                     << ". Please enter a number.\n";
+                continue;   // Ask again
+            }
+
+            // Check if mark is out of the valid range
+            if (mark < 0 || mark > 100) {
+                cout << "Invalid marks for Subject " << subjectNum
+                     << "! Marks must be between 0 and 100.\n";
+            } else {
+                break;   // Valid mark entered, exit loop
+            }
+        }
+        return mark;
+    }
+
 public:
     void inputData() {
         cout << "Enter student's name: ";
         getline(cin, name);
 
         for (int j = 0; j < 3; j++) {
-            cout << "Enter marks for subject " << (j + 1) << ": ";
-            cin >> marks[j];
+            marks[j] = getValidMark(j + 1);   // Get a valid mark (0-100)
         }
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear leftover newline for next getline
     }
 
     void calculateTotal() {

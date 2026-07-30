@@ -1,15 +1,42 @@
 #include <iostream>
+#include <limits>          // Needed for numeric_limits (used to clear input buffer)
 using namespace std;
+
+// Function to get a valid score between 0 and 100 for a given student
+int getValidScore(int studentNum) {
+    int score;
+    while (true) {
+        cout << "Enter score for Student " << studentNum << ": ";
+        cin >> score;
+
+        // Check if input was not a number
+        if (cin.fail()) {
+            cin.clear();                                              // Clear the error flag on cin
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');      // Discard the bad input left in buffer
+            cout << "Invalid input for Student " << studentNum
+                 << ". Please enter a number.\n";
+            continue;   // Ask again
+        }
+
+        // Check if score is out of the valid range
+        if (score < 0 || score > 100) {
+            cout << "Invalid score for Student " << studentNum
+                 << "! Score must be between 0 and 100.\n";
+        } else {
+            break;   // Valid score entered, exit loop
+        }
+    }
+    return score;
+}
 
 int main() {
     const int SIZE = 5;      // Number of students
     int scores[SIZE];        // Array to store 5 student scores
     int *ptr = scores;       // Pointer set to point at the start of the array
 
-    // Input scores using pointer arithmetic
+    // Input scores using pointer arithmetic (with validation)
     for (int i = 0; i < SIZE; i++) {
-        cout << "Enter score for Student " << i + 1 << ": ";
-        cin >> *(ptr + i);   // same as scores[i], but written using pointer arithmetic
+        *(ptr + i) = getValidScore(i + 1);   // same as scores[i], but written using pointer arithmetic
     }
 
     // Display all scores using the pointer
