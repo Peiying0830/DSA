@@ -5,10 +5,10 @@ using namespace std;
 
 class Student {
 private:
-    string name;
-    double marks[3];
-    double total;
-    double average;
+    string name;         // Student's name (hidden from outside)
+    double marks[3];      // Marks for 3 subjects (hidden from outside)
+    double total;         // Total marks
+    double average;       // Average marks
 
     // Private helper method to get a valid mark between 0 and 100
     double getValidMark(int subjectNum) {
@@ -17,21 +17,19 @@ private:
             cout << "Enter marks for subject " << subjectNum << ": ";
             cin >> mark;
 
-            // Check if input was not a number
             if (cin.fail()) {
-                cin.clear();                                              // Clear the error flag on cin
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');      // Discard the bad input left in buffer
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Invalid input for Subject " << subjectNum
                      << ". Please enter a number.\n";
-                continue;   // Ask again
+                continue;
             }
 
-            // Check if mark is out of the valid range
             if (mark < 0 || mark > 100) {
                 cout << "Invalid marks for Subject " << subjectNum
                      << "! Marks must be between 0 and 100.\n";
             } else {
-                break;   // Valid mark entered, exit loop
+                break;
             }
         }
         return mark;
@@ -43,9 +41,9 @@ public:
         getline(cin, name);
 
         for (int j = 0; j < 3; j++) {
-            marks[j] = getValidMark(j + 1);   // Get a valid mark (0-100)
+            marks[j] = getValidMark(j + 1);
         }
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Clear leftover newline for next getline
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
 
     void calculateTotal() {
@@ -72,20 +70,21 @@ public:
 
 int main() {
     const int numStudents = 3;
-    Student classroom[3];   // Array of 3 Student objects
+    Student classroom[numStudents];   // array of Student objects (Part 4 requirement)
 
-    // Loop through the array to input data for each student
+    // Loop through the array to call inputData() for each student
     for (int i = 0; i < numStudents; i++) {
-        cout << "\n--- Entering data for student " << (i + 1) << " ---" << endl;
+        cout << "\n--- Entering data for Student " << (i + 1) << " ---\n";
         classroom[i].inputData();
         classroom[i].calculateTotal();
         classroom[i].calculateAverage();
     }
 
-    // Loop through the array to display each student's report
-    cout << "\n=== Classroom Roster ===" << endl;
+    // Loop through the array to display the classroom roster
+    cout << "\n========== CLASSROOM REPORT ==========\n";
     for (int i = 0; i < numStudents; i++) {
         classroom[i].displayReport();
+        cout << "---------------------------------------" << endl;
     }
 
     return 0;
