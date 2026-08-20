@@ -1,0 +1,27 @@
+{
+        "version": "0.2.0",
+        "configurations": [
+                {
+                        "name": "Run current Python file",
+                        "type": "debugpy",
+                        "request": "launch",
+                        "program": "${file}",
+                        "console": "integratedTerminal",
+                        "cwd": "${workspaceFolder}"
+                },
+                {
+                        "name": "Run GA CinemaTicketBooking",
+                        "type": "cppdbg",
+                        "request": "launch",
+                        "program": "${workspaceFolder}\\GA\\CinemaTicketBooking.exe",
+                        "args": [],
+                        "stopAtEntry": false,
+                        "cwd": "${workspaceFolder}\\GA",
+                        "environment": [],
+                        "externalConsole": false,
+                        "MIMode": "gdb",
+                        "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
+                        "preLaunchTask": "Build GA CinemaTicketBooking"
+                }
+        ]
+}
