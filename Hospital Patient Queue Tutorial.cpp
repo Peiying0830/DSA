@@ -1,38 +1,47 @@
 // Program Name: Hospital Patient Queue Tutorial
 
 #include <iostream>
+#include <limits>
 #include <string>
 using namespace std;
 
 const int MAX = 5;
 
+// Queue class stores and manages the hospital patient waiting list.
 class Queue {
 private:
+    // These arrays store patient details using the same index.
     string patientID[MAX];
     string patientName[MAX];
     int patientAge[MAX];
+
+    // front stores the position of the next patient to attend.
+    // rear stores the position of the last patient registered.
     int front;
     int rear;
 
 public:
     // Constructor
     Queue() {
+        // -1 means the queue has no patients at the beginning.
         front = -1;
         rear = -1;
     }
 
     // Check if queue is empty
     bool isEmpty() {
+        // If front is -1, there is no patient in the queue.
         return (front == -1);
     }
 
     // Check if queue is full
     bool isFull() {
+        // Queue is full when rear reaches the last array index.
         return (rear == MAX - 1);
     }
 
     // Add patient to queue
-    void enqueue() {
+    void registerPatient() {
 
         if (isFull()) {
             cout << "\nQueue is FULL! Cannot add more patients.\n";
@@ -53,13 +62,15 @@ public:
         cout << "Enter Patient Age: ";
         cin >> age;
 
-        // First patient
+        // If this is the first patient, front starts at index 0.
         if (front == -1) {
             front = 0;
         }
 
+        // Move rear to the next empty position before storing the patient.
         rear++;
 
+        // Store patient details at the rear position.
         patientID[rear] = id;
         patientName[rear] = name;
         patientAge[rear] = age;
@@ -68,7 +79,7 @@ public:
     }
 
     // Remove patient from queue
-    void dequeue() {
+    void attendPatient() {
 
         if (isEmpty()) {
             cout << "\nQueue is EMPTY! No patient to attend.\n";
@@ -79,18 +90,19 @@ public:
              << " - " << patientName[front]
              << " has been attended.\n";
 
-        // If this is the last patient
+        // If this is the last patient, reset the queue to empty.
         if (front == rear) {
             front = -1;
             rear = -1;
         }
         else {
+            // Move front to the next patient in the queue.
             front++;
         }
     }
 
     // View first patient
-    void peek() {
+    void viewNextPatient() {
 
         if (isEmpty()) {
             cout << "\nQueue is EMPTY!\n";
@@ -104,7 +116,7 @@ public:
     }
 
     // Display all patients
-    void display() {
+    void displayAllPatients() {
 
         if (isEmpty()) {
             cout << "\nQueue is EMPTY!\n";
@@ -116,6 +128,7 @@ public:
         cout << "Position\tID\tName\tAge\n";
         cout << "------------------------------------\n";
 
+        // Display patients from front to rear in queue order.
         for (int i = front; i <= rear; i++) {
             cout << i - front + 1 << "\t\t"
                  << patientID[i] << "\t"
@@ -127,7 +140,7 @@ public:
     }
 
     // Check queue status
-    void status() {
+    void checkQueueStatus() {
 
         if (isEmpty()) {
             cout << "\nQueue Status: EMPTY\n";
@@ -158,6 +171,7 @@ public:
         cout << "\nEnter Patient ID to search: ";
         cin >> id;
 
+        // Search each patient from front to rear.
         for (int i = front; i <= rear; i++) {
 
             if (patientID[i] == id) {
@@ -203,28 +217,35 @@ int main() {
         cout << "====================================\n";
 
         cout << "Enter your choice: ";
-        cin >> choice;
+
+        // Prevent invalid input, such as letters, from breaking the menu loop.
+        if (!(cin >> choice)) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "\nInvalid choice! Please enter a number.\n";
+            continue;
+        }
 
         switch (choice) {
 
             case 1:
-                q.enqueue();
+                q.registerPatient();
                 break;
 
             case 2:
-                q.dequeue();
+                q.attendPatient();
                 break;
 
             case 3:
-                q.peek();
+                q.viewNextPatient();
                 break;
 
             case 4:
-                q.display();
+                q.displayAllPatients();
                 break;
 
             case 5:
-                q.status();
+                q.checkQueueStatus();
                 break;
 
             case 6:
