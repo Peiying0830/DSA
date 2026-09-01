@@ -6,42 +6,33 @@ using namespace std;
 
 const int MAX = 5;
 
-// Circular queue implementation for a hospital patient waiting list.
 class Queue {
 private:
-    // Parallel arrays store each patient's details at the same index.
     string patientID[MAX];
     string patientName[MAX];
     int patientAge[MAX];
-
-    // front points to the next patient to be attended.
-    // rear points to the most recently registered patient.
-    // count tracks how many patients are currently in the queue.
     int front;
     int rear;
-    int count;
 
 public:
     // Constructor
     Queue() {
         front = -1;
         rear = -1;
-        count = 0;
     }
 
     // Check if queue is empty
     bool isEmpty() {
-        // In this circular queue, count is the easiest way to check empty/full.
-        return (count == 0);
+        return (front == -1);
     }
 
     // Check if queue is full
     bool isFull() {
-        return (count == MAX);
+        return (rear == MAX - 1);
     }
 
     // Add patient to queue
-    void registerPatient() {
+    void enqueue() {
 
         if (isFull()) {
             cout << "\nQueue is FULL! Cannot add more patients.\n";
@@ -62,24 +53,22 @@ public:
         cout << "Enter Patient Age: ";
         cin >> age;
 
-        // When adding the first patient, front must point to index 0.
-        if (isEmpty()) {
+        // First patient
+        if (front == -1) {
             front = 0;
         }
 
-        // Move rear forward. % MAX makes it wrap back to 0 after the last index.
-        rear = (rear + 1) % MAX;
+        rear++;
 
         patientID[rear] = id;
         patientName[rear] = name;
         patientAge[rear] = age;
-        count++;
 
         cout << "\nPatient registered successfully!\n";
     }
 
     // Remove patient from queue
-    void attendPatient() {
+    void dequeue() {
 
         if (isEmpty()) {
             cout << "\nQueue is EMPTY! No patient to attend.\n";
@@ -90,21 +79,18 @@ public:
              << " - " << patientName[front]
              << " has been attended.\n";
 
-        // If this is the last patient, reset the queue to empty state.
-        if (count == 1) {
+        // If this is the last patient
+        if (front == rear) {
             front = -1;
             rear = -1;
         }
         else {
-            // Move front forward and wrap around if needed.
-            front = (front + 1) % MAX;
+            front++;
         }
-
-        count--;
     }
 
     // View first patient
-    void viewNextPatient() {
+    void peek() {
 
         if (isEmpty()) {
             cout << "\nQueue is EMPTY!\n";
@@ -118,7 +104,7 @@ public:
     }
 
     // Display all patients
-    void displayAllPatients() {
+    void display() {
 
         if (isEmpty()) {
             cout << "\nQueue is EMPTY!\n";
@@ -126,26 +112,22 @@ public:
         }
 
         cout << "\n========== PATIENT QUEUE ==========\n";
-
         cout << "------------------------------------\n";
         cout << "Position\tID\tName\tAge\n";
         cout << "------------------------------------\n";
 
-        for (int i = 0; i < count; i++) {
-            // Convert queue position to the actual array index.
-            int index = (front + i) % MAX;
-
-            cout << i + 1 << "\t\t"
-                 << patientID[index] << "\t"
-                 << patientName[index] << "\t"
-                 << patientAge[index] << endl;
+        for (int i = front; i <= rear; i++) {
+            cout << i - front + 1 << "\t\t"
+                 << patientID[i] << "\t"
+                 << patientName[i] << "\t"
+                 << patientAge[i] << endl;
         }
 
         cout << "------------------------------------\n";
     }
 
     // Check queue status
-    void checkQueueStatus() {
+    void status() {
 
         if (isEmpty()) {
             cout << "\nQueue Status: EMPTY\n";
@@ -155,8 +137,10 @@ public:
         }
         else {
             cout << "\nQueue Status: AVAILABLE\n";
-            cout << "Number of patients: " << count << endl;
-            cout << "Available spaces: " << MAX - count << endl;
+            cout << "Number of patients: "
+                 << rear - front + 1 << endl;
+            cout << "Available spaces: "
+                 << MAX - (rear - front + 1) << endl;
         }
     }
 
@@ -174,17 +158,16 @@ public:
         cout << "\nEnter Patient ID to search: ";
         cin >> id;
 
-        for (int i = 0; i < count; i++) {
-            // Search follows the queue order, starting from front.
-            int index = (front + i) % MAX;
+        for (int i = front; i <= rear; i++) {
 
-            if (patientID[index] == id) {
+            if (patientID[i] == id) {
 
                 cout << "\nPatient found!\n";
-                cout << "ID   : " << patientID[index] << endl;
-                cout << "Name : " << patientName[index] << endl;
-                cout << "Age  : " << patientAge[index] << endl;
-                cout << "Position in Queue: " << i + 1 << endl;
+                cout << "ID   : " << patientID[i] << endl;
+                cout << "Name : " << patientName[i] << endl;
+                cout << "Age  : " << patientAge[i] << endl;
+                cout << "Position in Queue: "
+                     << i - front + 1 << endl;
 
                 found = true;
                 break;
@@ -225,23 +208,23 @@ int main() {
         switch (choice) {
 
             case 1:
-                q.registerPatient();
+                q.enqueue();
                 break;
 
             case 2:
-                q.attendPatient();
+                q.dequeue();
                 break;
 
             case 3:
-                q.viewNextPatient();
+                q.peek();
                 break;
 
             case 4:
-                q.displayAllPatients();
+                q.display();
                 break;
 
             case 5:
-                q.checkQueueStatus();
+                q.status();
                 break;
 
             case 6:
