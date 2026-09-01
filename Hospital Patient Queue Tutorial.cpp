@@ -1,15 +1,22 @@
+// Program Name: Hospital Patient Queue Tutorial
+
 #include <iostream>
 #include <string>
 using namespace std;
 
 const int MAX = 5;
 
+// Circular queue implementation for a hospital patient waiting list.
 class Queue {
 private:
+    // Parallel arrays store each patient's details at the same index.
     string patientID[MAX];
     string patientName[MAX];
     int patientAge[MAX];
 
+    // front points to the next patient to be attended.
+    // rear points to the most recently registered patient.
+    // count tracks how many patients are currently in the queue.
     int front;
     int rear;
     int count;
@@ -24,6 +31,7 @@ public:
 
     // Check if queue is empty
     bool isEmpty() {
+        // In this circular queue, count is the easiest way to check empty/full.
         return (count == 0);
     }
 
@@ -54,11 +62,12 @@ public:
         cout << "Enter Patient Age: ";
         cin >> age;
 
-        // First patient
+        // When adding the first patient, front must point to index 0.
         if (isEmpty()) {
             front = 0;
         }
 
+        // Move rear forward. % MAX makes it wrap back to 0 after the last index.
         rear = (rear + 1) % MAX;
 
         patientID[rear] = id;
@@ -81,12 +90,13 @@ public:
              << " - " << patientName[front]
              << " has been attended.\n";
 
-        // If this is the last patient
+        // If this is the last patient, reset the queue to empty state.
         if (count == 1) {
             front = -1;
             rear = -1;
         }
         else {
+            // Move front forward and wrap around if needed.
             front = (front + 1) % MAX;
         }
 
@@ -122,6 +132,7 @@ public:
         cout << "------------------------------------\n";
 
         for (int i = 0; i < count; i++) {
+            // Convert queue position to the actual array index.
             int index = (front + i) % MAX;
 
             cout << i + 1 << "\t\t"
@@ -164,6 +175,7 @@ public:
         cin >> id;
 
         for (int i = 0; i < count; i++) {
+            // Search follows the queue order, starting from front.
             int index = (front + i) % MAX;
 
             if (patientID[index] == id) {
