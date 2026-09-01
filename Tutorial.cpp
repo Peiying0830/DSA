@@ -97,8 +97,21 @@ int main() {
     int maxSize;
 
     // Additional challenge: let user set max history size at start
-    cout << "Enter maximum history size: ";
-    cin >> maxSize;
+    do {
+        cout << "Enter maximum history size: ";
+
+        if (!(cin >> maxSize)) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            cout << "Invalid input. Please enter a number.\n";
+            continue;
+        }
+
+        if (maxSize <= 0) {
+            cout << "Maximum history size must be greater than 0.\n";
+        }
+    } while (maxSize <= 0);
+
     cin.ignore(); // clear leftover newline from cin >> before using getline
 
     BrowserHistory history(maxSize);

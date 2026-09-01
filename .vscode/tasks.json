@@ -13,9 +13,36 @@
                         "problemMatcher": [],
                         "group": {
                                 "kind": "build",
-                                "isDefault": true
+                                "isDefault": false
                         },
                         "detail": "Runs the currently open Python file using the workspace virtual environment."
+                },
+                {
+                        "type": "cppbuild",
+                        "label": "Build current C++ file",
+                        "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+                        "args": [
+                                "-fdiagnostics-color=always",
+                                "-std=c++17",
+                                "-Wall",
+                                "-Wextra",
+                                "-pedantic",
+                                "-g",
+                                "${file}",
+                                "-o",
+                                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                        ],
+                        "options": {
+                                "cwd": "${fileDirname}"
+                        },
+                        "problemMatcher": [
+                                "$gcc"
+                        ],
+                        "group": {
+                                "kind": "build",
+                                "isDefault": true
+                        },
+                        "detail": "Builds the currently open C++ file."
                 },
                 {
                         "type": "cppbuild",
@@ -44,10 +71,6 @@
                         "problemMatcher": [
                                 "$gcc"
                         ],
-                        "group": {
-                                "kind": "build",
-                                "isDefault": false
-                        },
                         "detail": "Builds all C++ source files for the GA cinema ticket booking project."
                 }
         ],

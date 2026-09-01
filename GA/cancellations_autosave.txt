@@ -1,2 +1,0 @@
-TicketID|CustomerName|Reason|CancelledAt
-1006|LPY|Timeslot wrongly|2026-08-18 15:38:33
