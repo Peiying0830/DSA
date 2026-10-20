@@ -1,19 +1,45 @@
 {
-        "version": "0.2.0",
-        "configurations": [
-                {
-                        "name": "Run current C++ file",
-                        "type": "cppdbg",
-                        "request": "launch",
-                        "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                        "args": [],
-                        "stopAtEntry": false,
-                        "cwd": "${fileDirname}",
-                        "environment": [],
-                        "externalConsole": false,
-                        "MIMode": "gdb",
-                        "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
-                        "preLaunchTask": "Build current C++ file"
-                }
-        ]
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run DSA-FA Hospital Management System",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\DSA-FA Hospital Management System\\HospitalManagement.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}\\DSA-FA Hospital Management System",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
+            "preLaunchTask": "Build DSA-FA Hospital Management System"
+        },
+        {
+            "name": "Run current C++ file",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\DSA-FA Hospital Management System\\HospitalManagement.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}\\DSA-FA Hospital Management System",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
+            "preLaunchTask": "Build current C++ file"
+        },
+        {
+            "name": "Run single-file C++ lab",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
+            "preLaunchTask": "Build single-file C++ lab"
+        }
+    ]
 }

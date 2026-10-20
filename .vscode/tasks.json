@@ -1,78 +1,160 @@
 {
-        "tasks": [
-                {
-                        "label": "Run Python file",
-                        "type": "shell",
-                        "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
-                        "args": [
-                                "${file}"
-                        ],
-                        "options": {
-                                "cwd": "${workspaceFolder}"
-                        },
-                        "problemMatcher": [],
-                        "group": {
-                                "kind": "build",
-                                "isDefault": false
-                        },
-                        "detail": "Runs the currently open Python file using the workspace virtual environment."
-                },
-                {
-                        "type": "cppbuild",
-                        "label": "Build current C++ file",
-                        "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
-                        "args": [
-                                "-fdiagnostics-color=always",
-                                "-std=c++17",
-                                "-Wall",
-                                "-Wextra",
-                                "-pedantic",
-                                "-g",
-                                "${file}",
-                                "-o",
-                                "${fileDirname}\\${fileBasenameNoExtension}.exe"
-                        ],
-                        "options": {
-                                "cwd": "${fileDirname}"
-                        },
-                        "problemMatcher": [
-                                "$gcc"
-                        ],
-                        "group": {
-                                "kind": "build",
-                                "isDefault": true
-                        },
-                        "detail": "Builds the currently open C++ file."
-                },
-                {
-                        "type": "cppbuild",
-                        "label": "Build GA CinemaTicketBooking",
-                        "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
-                        "args": [
-                                "-fdiagnostics-color=always",
-                                "-std=c++17",
-                                "-Wall",
-                                "-Wextra",
-                                "-pedantic",
-                                "-g",
-                                "${workspaceFolder}\\GA\\main.cpp",
-                                "${workspaceFolder}\\GA\\Registry.cpp",
-                                "${workspaceFolder}\\GA\\WaitingLine.cpp",
-                                "${workspaceFolder}\\GA\\CancelLog.cpp",
-                                "${workspaceFolder}\\GA\\Finder.cpp",
-                                "${workspaceFolder}\\GA\\Ticket.cpp",
-                                "${workspaceFolder}\\GA\\MovieCatalog.cpp",
-                                "-o",
-                                "${workspaceFolder}\\GA\\CinemaTicketBooking.exe"
-                        ],
-                        "options": {
-                                "cwd": "${workspaceFolder}\\GA"
-                        },
-                        "problemMatcher": [
-                                "$gcc"
-                        ],
-                        "detail": "Builds all C++ source files for the GA cinema ticket booking project."
-                }
-        ],
-        "version": "2.0.0"
+    "tasks": [
+        {
+            "label": "Build DSA-FA Hospital Management System",
+            "type": "process",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-g",
+                "main.cpp",
+                "HospitalSystem.cpp",
+                "PatientBST.cpp",
+                "Input.cpp",
+                "MedicalHistory.cpp",
+                "ServiceQueue.cpp",
+                "ReferralGraph.cpp",
+                "Algorithms.cpp",
+                "HospitalLifecycle.cpp",
+                "Persistence.cpp",
+                "ScheduleBook.cpp",
+                "EmergencyQueue.cpp",
+                "PharmacyInventory.cpp",
+                "PrescriptionManager.cpp",
+                "BillingSystem.cpp",
+                "HospitalCommerce.cpp",
+                "-o",
+                "HospitalManagement.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}\\DSA-FA Hospital Management System"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Builds every Hospital Management module, independent of the active editor file."
+        },
+        {
+            "label": "Run Python file",
+            "type": "shell",
+            "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+            "args": [
+                "${file}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Runs the currently open Python file using the workspace virtual environment."
+        },
+        {
+            "label": "Build current C++ file",
+            "type": "cppbuild",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-g",
+                "main.cpp",
+                "HospitalSystem.cpp",
+                "PatientBST.cpp",
+                "Input.cpp",
+                "MedicalHistory.cpp",
+                "ServiceQueue.cpp",
+                "ReferralGraph.cpp",
+                "Algorithms.cpp",
+                "HospitalLifecycle.cpp",
+                "Persistence.cpp",
+                "ScheduleBook.cpp",
+                "EmergencyQueue.cpp",
+                "PharmacyInventory.cpp",
+                "PrescriptionManager.cpp",
+                "BillingSystem.cpp",
+                "HospitalCommerce.cpp",
+                "-o",
+                "HospitalManagement.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}\\DSA-FA Hospital Management System"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "Compatibility alias: builds the full DSA-FA Hospital Management System project."
+        },
+        {
+            "type": "cppbuild",
+            "label": "Build GA CinemaTicketBooking",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-g",
+                "${workspaceFolder}\\GA\\main.cpp",
+                "${workspaceFolder}\\GA\\Registry.cpp",
+                "${workspaceFolder}\\GA\\WaitingLine.cpp",
+                "${workspaceFolder}\\GA\\CancelLog.cpp",
+                "${workspaceFolder}\\GA\\Finder.cpp",
+                "${workspaceFolder}\\GA\\Ticket.cpp",
+                "${workspaceFolder}\\GA\\MovieCatalog.cpp",
+                "-o",
+                "${workspaceFolder}\\GA\\CinemaTicketBooking.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}\\GA"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Builds all C++ source files for the GA cinema ticket booking project."
+        },
+        {
+            "type": "cppbuild",
+            "label": "Build single-file C++ lab",
+            "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+            "args": [
+                "-fdiagnostics-color=always",
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-pedantic",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "detail": "For standalone lab .cpp files only; split-source projects use Build DSA-FA Hospital Management System."
+        }
+    ],
+    "version": "2.0.0"
 }
