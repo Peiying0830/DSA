@@ -14,6 +14,7 @@ bool EmergencyQueue::before(const EmergencyRecord& a, const EmergencyRecord& b) 
 void EmergencyQueue::siftUp(size_t index) {
     while(index>0) {
         size_t parent=(index-1)/2;
+        // Stop once the parent should be served before this child.
         if(!before(waiting[index],waiting[parent])) break;
         swap(waiting[index],waiting[parent]);
         index=parent;
@@ -23,9 +24,10 @@ void EmergencyQueue::siftUp(size_t index) {
 void EmergencyQueue::siftDown(size_t index) {
     for(;;) {
         size_t left=2*index+1;
-        if(left>=waiting.size()) return;
+        if(left>=waiting.size()) return; // No children: the current node is a leaf.
         size_t right=left+1;
         size_t first=(right<waiting.size() && before(waiting[right],waiting[left])) ? right : left;
+        // Compare with the higher-priority child to preserve both child relationships.
         if(!before(waiting[first],waiting[index])) return;
         swap(waiting[index],waiting[first]);
         index=first;
@@ -33,14 +35,16 @@ void EmergencyQueue::siftDown(size_t index) {
 }
 // Insert into the priority heap using priority and monotonically increasing arrival sequence.
 void EmergencyQueue::enqueue(const EmergencyRecord& record) {
+    // Insert at the end to keep the binary tree complete before restoring order.
     waiting.push_back(record);
     siftUp(waiting.size()-1);
 }
 // Remove the highest-priority waiting record; equal priorities are served oldest first.
 bool EmergencyQueue::dequeue(EmergencyRecord& record) {
     if (waiting.empty()) return false;
-    record=waiting.front();
+    record=waiting.front(); // Return the highest-priority, earliest-arriving record.
     if(waiting.size()==1) {waiting.pop_back();return true;}
+    // Fill the root vacancy with the last leaf, then move it down as necessary.
     waiting.front()=std::move(waiting.back());
     waiting.pop_back();
     siftDown(0);
@@ -48,6 +52,8 @@ bool EmergencyQueue::dequeue(EmergencyRecord& record) {
 }
 // Pop a copied heap to inspect service order without changing the live queue.
 vector<EmergencyRecord> EmergencyQueue::records() const {
+    // The backing array is heap-ordered, not fully sorted. Repeated dequeue gives
+    // the actual service order while the live heap remains available for serving.
     auto copy = *this;
     vector<EmergencyRecord> result;
     EmergencyRecord record;
