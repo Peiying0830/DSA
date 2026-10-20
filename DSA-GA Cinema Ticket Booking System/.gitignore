@@ -1,0 +1,11 @@
+# Build output
+*.exe
+*.o
+*.obj
+
+# Editor settings
+.vscode/
+
+# Temporary check builds
+*_check.exe
+*_check2.exe

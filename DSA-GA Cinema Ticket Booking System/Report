@@ -1,0 +1,37 @@
+Cinema Ticket Booking System Report
+Generated At: 2026-08-18 15:14:10
+
+System Summary
+Total tickets: 8
+Waiting tickets: 7
+Served tickets: 1
+Cancelled tickets: 0
+Cancellations in log: 0
+
+Total active revenue: RM134.00
+
+Tickets Sorted by Ticket ID
+  Ticket #1001 | Len Pei Ying | Spider-Man: Brand New Day | Action | P12 | English | 2h 15m | Hall 1 | 10:00 | B09 | Student | RM12.00 | SERVED
+  Ticket #1002 | Len Pei Ying | Kung Fu Soccer | Comedy | P12 | Mandarin | 1h 46m | Hall 4 | 11:30 | A05 | Twin Seat | RM30.00 | WAITING
+  Ticket #1003 | LPY | Kung Fu Soccer | Comedy | P12 | Mandarin | 1h 46m | Hall 5 | 16:30 | A01 | Twin Seat | RM30.00 | WAITING
+  Ticket #1004 | LPY | Kung Fu Soccer | Comedy | P12 | Mandarin | 1h 46m | Hall 5 | 16:30 | C05 | Child | RM8.00 | WAITING
+  Ticket #1005 | LPY | Kung Fu Soccer | Comedy | P12 | Mandarin | 1h 46m | Hall 5 | 16:30 | A18 | Wheelchair Seat | RM18.00 | WAITING
+  Ticket #1006 | LPY | Minions & Monsters | Animation | U | English | 1h 30m | Hall 2 | 13:45 | H09 | Student | RM12.00 | WAITING
+  Ticket #1007 | LPY | Minions & Monsters | Animation | U | English | 1h 30m | Hall 2 | 13:45 | H10 | Student | RM12.00 | WAITING
+  Ticket #1008 | LPY | Minions & Monsters | Animation | U | English | 1h 30m | Hall 2 | 13:45 | H11 | Student | RM12.00 | WAITING
+
+Searching Algorithm Comparison
+Linear Search: O(n), checks records one by one and does not need sorted data.
+Binary Search: O(log n), faster on sorted data but requires ticket IDs to be sorted first.
+Sample Ticket ID tested: 1008
+Linear search comparisons: 8 (found)
+Binary search comparisons: 4 (found)
+Linear advantage: simple and works on unsorted ticket records.
+Linear disadvantage: slower when ticket records become large.
+Binary advantage: fewer comparisons on sorted ticket IDs.
+Binary disadvantage: ticket IDs must be sorted before searching.
+For small unsorted data, linear search is simpler. For large sorted data, binary search performs better.
+
+Sorting Algorithm: Insertion Sort
+Insertion sort comparisons: 7
+Insertion sort shifts: 0
