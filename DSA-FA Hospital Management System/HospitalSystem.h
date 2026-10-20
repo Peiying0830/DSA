@@ -4,11 +4,9 @@
 
 #pragma once
 #include <array>
-#include <stack>
 #include <string>
 #include <vector>
 using std::array;
-using std::stack;
 using std::string;
 using std::vector;
 
@@ -20,13 +18,13 @@ using std::vector;
 #include "ReferralGraph.h"
 #include "Algorithms.h"
 #include "HospitalData.h"
+#include "UndoStack.h"
 #include "Persistence.h"
 #include "ScheduleBook.h"
 class HospitalSystem {
     static constexpr int capacity = 100;
     HospitalData state;
-    struct UndoEntry { HospitalData previous; string description; };
-    stack<UndoEntry> undo; // Task 3: LIFO; last completed change is undone first.
+    UndoStack undo; // Task 3: hand-written linked stack, last change undone first.
     PatientBST index;
     int nextServiceOrderID = 1;
     int nextDoctorID = 1;

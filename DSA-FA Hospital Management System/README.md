@@ -1,7 +1,7 @@
 # DSA-FA Hospital Management System
 
 C++17 console application for the DSA Final Assessment. Patient records use an
-array and BST, medical history a singly linked list, Undo a stack, normal service
+array and BST, medical history a singly linked list, Undo a manually implemented linked stack, normal service
 a circular FIFO queue, and referrals a directed graph. Searching and sorting
 algorithms are implemented manually in Algorithms.cpp.
 
@@ -234,13 +234,13 @@ Captured visit-service prices and issued invoice amounts do not change later.
 | --- | --- |
 | 1 Array | At least 10 patients; display/add/search/update/delete |
 | 2 Linked list | Visit history add/delete/search/traversal in chronological order |
-| 3 Stack | Latest operation, LIFO Undo, empty-stack message |
+| 3 Stack | Hand-written linked stack in UndoStack.h: push, pop, top, empty, clear; snapshot Undo and empty-stack message |
 | 4 Queue | Enqueue, dequeue, peek, display, FIFO, empty-queue message |
 | 5 BST | Insert/search/delete and ID-ascending in-order output |
 | 6 Graph | Prescribed directed referrals; DFS and BFS |
 | 7 Searching | Same ID with Linear/Binary, found/missing and comparison counts |
 | 8 Sorting | Original records, selected key/order, Merge/Bubble results, counts/time |
-| 9 Additional function | Emergency heap priority queue; equal priorities use FIFO |
+| 9 Additional function | Hand-written array-backed binary min-heap with siftUp/siftDown in EmergencyQueue.cpp; equal priorities use FIFO |
 
 From A (Emergency), DFS is A B D F E C and BFS is A B C D E F. These list
 reachable departments; they are not a single continuous referral route.

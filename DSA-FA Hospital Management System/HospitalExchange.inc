@@ -272,7 +272,7 @@ void HospitalSystem::clearData() {
     audit={{Persistence::timestamp(),"Reset hospital to default demo data"}};
     try {
         storage.save(snapshot());
-        undo=stack<UndoEntry>{};
+        undo.clear();
         ConsoleUI::savedNoticePending=true;
         ConsoleUI::message("OK","Default data restored. The next new patient ID is P011; next appointment: A001.");
     } catch(const exception& error) {
